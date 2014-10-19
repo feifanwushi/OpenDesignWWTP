@@ -7,4 +7,4 @@ Wiki包括针对用户的Wiki和针对开发人员的Wiki
 https://github.com/he-yang/OpenDesignWWTP/wiki
 
 <h2>联系</h2>
-he-yang
+he-yang, 电子邮件 he AT heyang DOT xyz
