@@ -11,4 +11,4 @@ https://github.com/he-yang/OpenDesignWWTP/wiki
 
 
 <h2>Contact</h2>
-Project lead: he-yang, email : he-yang@users.noreply.github.com
+Project lead: he-yang, email : he-yang at heyang dot xyz
