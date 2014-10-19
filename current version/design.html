@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="keywords" content="OpenDesignWWTP, Open Source, Wastewater treatment design, computer design,环境工程设计,水处理设计">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href="css/tip-yellow.css" rel="stylesheet" type="text/css" />
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="javascripts/extensions.js"></script>
+<script src="javascripts/jquery.validate.min.js"></script>
+<!--<script src="javascripts/jquery.poshytip.min.js"></script>-->
+<script src="javascripts/jquery.jsontotable.min.js"></script>
+<script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+
+	
+
+
+	//LANGUAGE
+	var lang=getlang()
+	//RETRIEVE DATABASE
+	var design=getjson("design_"+lang)
+	var label=getjson("label_"+lang)
+
+//
+		//FUNCTION LOCALSTORAGE EQUIPMENT
+	function storeequipment(y)
+	{
+		if(localStorage.getItem("equipment"))
+			{ var tmp_equipment=JSON.parse(localStorage.equipment)
+			 tmp_equipment[y]=[];
+			}
+		else
+			{ var tmp_equipment={};
+			 tmp_equipment[y]=[];
+			}
+		
+		$("#form_equipment :checkbox:checked").each(function(index,element) {
+           tmp_equipment[y].push($(this).attr("id"))
+		   
+        });	
+		localStorage.setItem("equipment",JSON.stringify(tmp_equipment))
+		alert("OK")
+	}
+	
+	
+	//FUNCTION GETEQUIPMENT LIST
+	function getequipment(y,lang)
+	{//Y== CURRENT_UNIT OR UNIT[1], LANG==LANGUAGE
+	
+	//$.getJSON("json/equipment_"+lang+".json", function(data){
+		var equipment=getjson("equipment_"+lang)
+		var tmp_html=""
+		
+		$("#div_equipment").html('<form id="form_equipment"><table class="table table-hover"><caption><h1>'+label.showequipment+'<h1></caption><tbody></tbody></table><input class="btn btn-default" type="button" value='+label.button.add_to_equipment_cart+' onclick="storeequipment(&quot;'+y+'&quot;)"></form>')
+		$.each(equipment[y],function(key,value){
+			tmp_html+='<tr><td class="width-33 text-right">'+value["name"]+'</td><td class="width-33">'+value["details"]+'</td><td class="width-33 text-center"><label class="checkbox"><input type="checkbox" name="equipment" id='+key+'>'+label.add_to_equipment_cart+'</label></td></tr>'
+			
+			
+			});
+		
+		$("#div_equipment tbody").append(tmp_html)
+		
+		//$.jsontotable(equipment[y], {id:"#div_equipment",header:false,className:"table table-hover"});
+		//$("#button_equipment").attr("disabled",true)
+		//$("#div_equipment table").prepend()
+	//})}
+	}
+
+
+	
+	
+	
+	
+	//RETRIEVE UNIT INFO
+	var units=new Array("basic",requestpara("unit"))
+	
+	var designarray=new Array()
+	for (x in design){designarray.push(x)}
+	if ($.inArray(units[1],designarray)==-1){
+		document.write("<h1>404, "+units[1]+" not supported by OpenDesignWWTP at this moment,please go back</h1>" )
+		}
+	
+	
+	
+	//CHANGE PAGE TITLE
+	document.title+=design[units[1]]["name"];
+	
+	
+
+
+$(document).ready(function() {
+	//DIV MANIPULATION--HEADER FOOTER CNETER
+	buildpage();
+	
+	
+	if(window.localStorage.getItem("design")){
+	var local_design=JSON.parse(window.localStorage.getItem("design"))
+	}
+
+	//DIV MANIPULATION--ADD DIVS TO CENTER
+	var tmp_html='<div id="div_form"></div><div class="container-fluid" id="div_equipment"></div><div id="div_result" class="container-fluid text-center"></div>'
+	$("#div_center").html(tmp_html);
+	
+	//DIV MANIPULATION--EQUIPMENT
+	$("#div_equipment").html('<div class="col-sm-offset-5 col-sm-5"><button class="btn btn-default" id="button_equipment" onclick="getequipment(&apos;'  +units[1]    +'&apos;,&apos;'    +lang    +'&apos;)">'+label.button.equipment+'</button></div>');	//getequipment('+units[1]+','+lang+')
+	
+	//DIV MANIPULATION--FORM
+	//$("#div_form").html()
+	tmp_html='<h2 class="text-center">'+ design[units[1]]["name"] +'</h2><div class="panel panel-default" ><div class="panel-heading"><h3 class="panel-title">'+label.select_code+'</h3></div><div class="panel-body text-center" id="div_code"></div></div>'
+	$("#div_form").before(tmp_html);
+		//APPEND CODE RADIOS TO PANELS
+	tmp_html=""
+	for (key in design[units[1]]["design"]){
+	tmp_html+='<label class="radio-inline"><input role="code" type="radio" name="code" id='+ key+' > '+ design[units[1]]["design"][key]["name"]+' </label>'}
+	$("#div_code").prepend(tmp_html);
+	
+	
+	
+	//START CODE SELECTION LISTERNER
+	$("input[role='code']").click(function(){
+		var c=$(this).attr("id")
+		
+		
+		
+		
+		
+	
+	
+	
+		//FORM GENERATION	
+			$("#div_form").html('<form class="form-horizontal" role="form" id=form_'+units[1]+' name=form_'+units[1]+' method="post"><div class="form-group"><div class="col-sm-offset-5 col-sm-5">\
+			<input type="submit" class="btn btn-default" name="submit" id="submit" value='+ label.button.submit +'>\
+    		<input type="reset" class="btn btn-default" name="reset" id="reset" value='+label.button.reset+'></div></form>');
+		
+		//PREPEND FIELDSETS/PANELS TO FORM   
+		tmp_html=""
+		for (i in units){			
+		tmp_html+='<div class="panel panel-default" ><div class="panel-heading"><h3 class="panel-title">'+design[units[i]]["name"]+'</h3></div><div class="panel-body" id="div_'+units[i]+'"></div></div> ';				
+		}	
+		$("form").prepend(tmp_html)	
+
+		
+		
+		//APPEND TEXTS/RADIOS/SELECTS TO PANELS
+		var tmp_value=""
+		var tmp_interlock
+		var display=""
+		var inputkey
+		
+		for (i in units){	
+				
+			
+			for (x in design[units[i]]["design"][c]["input"]){
+				inputkey=design[units[i]]["design"][c]["input"][x]
+				switch(inputkey["type"]){		
+				
+				
+						
+					case "radio":
+						
+						var radiovalues=new Array();
+						//var tmp_boolean=true;
+						tmp_html='<div class="form-group"><label class="col-sm-5 control-label">'+inputkey["name"]+'</label>'
+						radiovalues=inputkey["value"].split("|");
+						tmp_html+='<div class="col-sm-5">'			
+						for (var j=0;j<radiovalues.length;j++) {
+							if(localStorage[units[i]+"_"+x] && localStorage[units[i]+"_"+x]==radiovalues[j] ) {tmp_value="checked "} else {tmp_value=" "}//////////////////////////////////////////////////////////////
+							tmp_html+='<label class="radio-inline"><input type="radio" name='+x+' id='+x+'_'+j+' required '+ tmp_value+'checked value='+radiovalues[j]+'>'+radiovalues[j]+'</label>' 
+						
+						}
+						
+						
+						radiovalues=[];
+						tmp_html+='</div></div>';
+						$("#div_"+units[i]).append(tmp_html);
+						break;	
+						
+						
+						
+									
+					case "select":
+						break;
+					default:
+						//if(design[units[i]]["input"][x]["interlock"]){tmp_interlock=""}else{tmp_interlock='interlock="'+design[units[i]]["input"][x]["interlock"]+'"'}
+						//if(tmp_value=localStorage[units[i]+"_"+x])  {tmp_value=design[units[i]]["input"][x]["value"]}				
+						tmp_html='<div class="form-group"><label class="col-sm-5 control-label" for='+x+'>'+inputkey["name"]+'</label><div class="col-sm-5 input-group"><input class="form-control" data-rule-required="true" data-rule-number="true" type="text"  name='+x+' id='+x+' value='+inputkey["value"]+'></div></div>';
+						$("#div_"+units[i]).append(tmp_html);
+						
+						if(inputkey["interlock"]){$("#"+ x).attr("interlock",inputkey["interlock"])}
+						var inputkey_exist=true
+						try {local_design[units[i]]["design"][c]["input"][x]} catch(e){inputkey_exist= false}	
+						
+						if(inputkey_exist)
+						 { $("#"+x).attr("value",local_design[units[i]]["design"][c]["input"][x]);
+						  $("#"+x).after('<span tabindex="0" class="input-group-addon" for="info-sign" ><span  class="glyphicon glyphicon-info-sign" ></span></span>')}
+						  
+						// onclick="alert(this.title)"   title='+label.last_input+'
+						  
+						var alias_exist=true;
+						try	{localStorage.design.alias} catch(e){alias_exist=false;}//////////////////////////////////////
+						if(alias_exist){					
+						for (j in local_design["alias"]){
+						 //typeof (alias)!='undefined' && 		
+						if(j==inputkey["alias"])
+							 { 					
+													
+						 	 $("#"+x).after('<span class="input-group-addon" role="suggest_user_alias" forid='+x+' local_alias_key='+j+'><a href="javascript:void(0)">'+label.suggest_user_alias+'</a></span>')}
+						  
+						 	}}
+						
+						
+						
+						
+					break;
+				}
+				
+			}
+			//$("#div_"+units[i]).append(tmp_html);
+		}
+		
+	$("span[role='suggest_user_alias']").click(function(){
+	if(confirm(label.confirm_user_alias)) {
+		
+		$("#"+$(this).attr("forid")).attr("value",local_design["alias"][$(this).attr("local_alias_key")]);}})
+
+
+
+
+
+
+
+
+	//FORM VALIDATION
+	$("#form_"+units[1]).validate({
+		debug:true,
+		submitHandler: function() {
+    	// RUN FUNCTION BASED ON A VALID FORM
+			 //SEND CURRENT_UNIT, FORM_SERIALIZEDARRAY(JSON FORMAT) TO FUNCTION CALC
+			 
+			 design_proc(units[1], c, $("#form_"+units[1]).serializeArray())
+			
+			 }
+			 
+	});
+	
+	//TIPS,POSHYTIPS
+/*	for(i in units){
+		for (x in design[units[i]]["design"][c]["input"]){		
+			$('#'+x).poshytip({
+				content:design[units[i]]["design"][c]["input"][x]["tip"],
+				showOn: 'focus',
+				alignTo: 'target',
+				alignX: 'inner-left',
+				offsetX: 0,
+				offsetY: 5,
+				showTimeout: 100
+			});
+		};		
+	}*/
+		//TIPS,TOOLTIPS
+	for(i in units){
+		for (x in design[units[i]]["design"][c]["input"]){		
+			$('#'+x).popover({
+				content:design[units[i]]["design"][c]["input"][x]["tip"],
+				placement:"top",
+				trigger:"focus"
+				
+			});
+		};		
+	}
+	//POPOVER ALERTS FOR LAST INPUT
+	$("span[for='info-sign']").popover({
+		content:label.last_input,
+		placement:"left",
+		trigger:"focus"
+		})
+	
+		
+			
+	//HIDE TEXT INPUTS DUE TO USER SELECTIOIN FOR DIFFERENT CALCULATION METHODS
+	$("form :radio:checked").each(function(key,value){
+		$("[interlock^="+(this.id).substr(0,(this.id).length-1)+"]").attr("disabled","disabled");
+		$("[interlock="+this.id+"]").attr("disabled",false);	
+		})
+
+	
+	$("form :radio").click(function(){
+		$("[interlock^="+(this.id).substr(0,(this.id).length-1)+"]").attr("disabled","disabled");
+		$("[interlock="+this.id+"]").attr("disabled",false);
+	})
+	
+
+
+});//CLOSE CODE SELECTION
+	$("input[role='code']:first").click()
+
+
+
+});//CLOSE DOCUMENT.READY
+	
+
+</script>
+<script src="javascripts/ready.js"></script>
+<noscript> Your Browser does not support javascript OR you have disabled javascript </noscript>
+</head>
+<body>
+
+<!--<div id="div_header" ><div id="div_logo">OpenDesignWWTP</div><div id="div_nav"></div></div>
+<div id="div_center" ><div id="div_form"></div><div class="container-fluid" id="div_equipment"></div><div id="div_result" class="container-fluid text-center"></div></div>
+<div id="div_footer"></div>-->
+</body>
+</html>

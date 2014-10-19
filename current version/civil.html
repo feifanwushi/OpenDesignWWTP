@@ -1,0 +1,125 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="keywords" content="OpenDesignWWTP, Open Source, Wastewater treatment design, computer design,环境工程设计,水处理设计">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href="css/tip-yellow.css" rel="stylesheet" type="text/css" />
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="javascripts/extensions.js"></script>
+<script src="javascripts/jquery.jsontotable.min.js"></script>
+<script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+	//LANGUAGE
+				var lang=getlang()
+				//RETRIEVE DATABASE
+				//var equipment=getjson("equipment_"+lang);
+				var label=getjson("label_"+lang);
+				var design=getjson("design_"+lang);
+	
+	
+$(document).ready(function() {
+    
+	buildpage();
+	
+	if(localStorage.getItem("civil"))
+			{ var tmp_civil=JSON.parse(localStorage.civil);
+			
+			
+			//tmp_civil=JSON.parse('{"sludge_equalization_tank":{"dimension":{"GB":{"L":"81.690","B":"81.690","H":"0.350"},"DIN":{"L":"881.690","B":"881.690","H":"0.3350"}}}}')
+			
+			 var tmp_html
+			 var tmp_code_name
+			 //var code_amount
+			 
+			 $("#div_center").html('<table class="table table-hover"><caption>'+label.civil_cart+'</caption><tr><th scope="col"></th><th scope="col"></th><th scope="col">L</th><th scope="col">B</th><th scope="col">D</th><th scope="col">H</th></tr></tbody></table>');
+				 $.each(tmp_civil,function(key_civil,value_civil){
+					 var i_code=0;//No. OF CODE STORED
+					 
+					 	//code_amount=0;//LENGTH OF VALUE_CIVIL , I.E. THE AMOUNT OF CODES STORED
+						//for(x in value_civil){code_amount=code_amound+1};
+					 $("tbody").append('<tr for='+key_civil+'><td rowspan="1" >'+design[key_civil]["name"]+'</td></tr>')
+					 
+					 $.each(value_civil.dimension,function(key_dimension,value_dimension){
+						 i_code=i_code+1;
+					 
+						 tmp_code_name=design[key_civil]["design"][key_dimension]["name"]
+						 if (i_code>1){
+							 $("tr[for="+key_civil+"]:first").after('<tr for='+key_civil+'><td for='+key_dimension+'>'+tmp_code_name+'</td><td for="L"></td><td for="B"></td><td for="D"></td><td for="H"></td><tr>')
+							 
+							 }else{
+							 $("tr[for="+key_civil+"]:first").append('<td for='+key_dimension+'>'+tmp_code_name+'</td><td for="L"></td><td for="B"></td><td for="D"></td><td for="H"></td>')}
+						 // TABLE ROWSPAN BASED ON AMOUNT OF CODES STORED
+						 $(" tr[for="+key_civil+"] td[rowspan]").attr("rowspan",i_code)
+						 
+						 //design.key_civil["design"][key_dimension]["name"])
+						 $.each(value_dimension,function(key,value){
+							 
+							 switch (key){
+							 case "L":
+							 $(" tr[for="+key_civil+"] td[for="+key_dimension+"] ~ td[for='L']").html(value)
+							 break;
+							 case "B":
+							 $(" tr[for="+key_civil+"] td[for="+key_dimension+"] ~ td[for='B']").html(value)
+							 break;
+							 case "D":
+							 $(" tr[for="+key_civil+"] td[for="+key_dimension+"] ~ td[for='D']").html(value)
+							 break;
+							 case "H":
+							 $(" tr[for="+key_civil+"] td[for="+key_dimension+"] ~ td[for='H']").html(value)
+							 break;
+							 default:
+							 break;}
+							 
+							 })
+				 console.log(key_dimension)
+				 		 
+						 })
+					 
+				
+		/*	 tmp_html=""
+				 for (x in value){
+				 tmp_html+='<tr for='+key+'><td class="width-33">'+equipment[key][value[x]]["name"]+'</td><td class="width-33">'+equipment[key][value[x]]["details"]+'</td></tr>';
+				 }
+				 $("#div_center tbody").append(tmp_html);
+				 $("tr[for="+key+"]:first").prepend('<td class="width-33 text-center" rowspan='+value.length+'>'+design[key]["name"]+'</td>')
+				 */
+				 })
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}
+		else
+			{ $("#div_center").html("currently, nothing stored")
+			}
+	
+	
+});
+
+</script>
+<script src="javascripts/ready.js"></script>
+</head>
+
+<body>
+</body>
+</html>

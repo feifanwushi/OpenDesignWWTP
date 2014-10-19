@@ -1,0 +1,109 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body{
+	font-family:Tahoma, Segoe, Verdana,华文中宋,宋体;
+	font-size:16px;
+	margin:0;
+	padding:0;
+	border:0;
+	}
+/*input[type="Submit"],[type="Reset"]{
+	font-family:Tahoma, Segoe, Verdana,华文中宋,宋体;}
+button{
+	font-family:Tahoma, Segoe, Verdana,华文中宋,宋体;}*/
+table {
+	border-collapse:collapse;
+	}
+.jsontotable table, .jsontotable th, .jsontotable td {
+		border: 1px solid black;
+		/*margin: 10px;*/
+	}
+div {
+/*	width:100%;*/
+	margin:0;
+	padding:0;
+	/*border:1px solid #000*/}
+/*#div_center{
+
+	width:60%;
+	margin-left: auto;
+margin-right: auto;
+	}*/
+
+.close-alert{
+	float:right;
+	/*z-index:10;*/
+	}
+.display-none{
+	display:none}
+
+
+
+.width-33{
+	width:33%;
+	}	
+
+/* root element for tabs  */
+.tabs {  
+	margin:0 !important; 
+	padding:0;
+	height:28px;
+	border-bottom:1px solid #666;	 	
+}
+
+/* single tab */
+.tabs li {  
+	float:left;	 
+	padding:0; 
+	margin:0;  
+	list-style-type:none;	
+}
+
+/* link inside the tab. uses a background image */
+.tabs a { 
+	float:left;
+	display:block;
+	padding:5px 30px;	
+	text-decoration:none;
+	border:1px solid #666;	
+	border-bottom:0px;
+	background-color:#06f;
+	color:#fff;
+	margin-right:2px;	
+	position:relative;
+	top:1px;	
+	outline:none;
+	-moz-border-radius:4px 4px 0 0;
+	border-radius:4px 4px 0 0;
+}
+
+.tabs a:hover {
+	background-color:#06f;
+	color:#fff;
+	font-weight:bold;
+}
+	
+/* selected tab */
+.tabs a.current {
+	background-color:#fff;
+	border-bottom:2px solid #ddd;	
+	color:#000;	
+	cursor:default;
+}
+
+	
+/* tab pane */
+.pane {
+	display:none;
+	border:1px solid #666;
+	border-width:0 1px 1px 1px;
+	min-height:150px;
+	padding:15px 20px;
+
+}
+
+
+
+

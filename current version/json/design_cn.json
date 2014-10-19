@@ -1,0 +1,335 @@
+﻿{
+    "basic": {
+        "name": "基础资料",
+        "design": {
+            "GB": {
+                "name": "GB国标",
+                "input": {
+                    "Q_av": {
+                        "name": "设计流量(吨/天)",
+                        "tip": "设计流量,单位t/d",
+                        "value": "10000"
+                    },
+                    "Kz": {
+                        "name": "系数",
+                        "tip": "污水：日变化系数；给水：1+管网漏失率",
+                        "value": "1"
+                    }
+                }
+            },
+            "DIN": {}
+        }
+    },
+	
+    "chemical_feed": {
+        "name": "辅助-加药",
+		"pinyin":"fuzhujiayao",
+        "category": "辅助",
+        "reference": "<cite><ul><li>《给水排水设计手册》???夜-？？？页</li><li>《室外给水规范。。。》</li></ul></cite>",
+        "design": {
+            "GB": {
+                "name": "GB国标",
+                "input": {
+                    "chemical": {
+                        "type": "radio",
+                        "name": "所用药剂",
+                        "tip": "选择需要使用的药剂，每次计算仅支持一种药剂",
+                        "value": "PAC|PAM"
+                    },
+                    "C": {
+                        "name": "药剂溶液浓度(%)",
+                        "tip": "配制溶液浓度，可采用5%-20%",
+                        "value": "10"
+                    },
+                    "dosage": {
+                        "name": "投药量(mg/L)",
+                        "tip": "每升水中投加药剂的量",
+                        "value": "25"
+                    },
+                    "dailypreptime": {
+                        "name": "每次配制溶液次数",
+                        "tip": "不宜超过3次",
+                        "value": "2"
+                    },
+                    "density": {
+                        "name": "溶液密度kg/m<sup>3</sup>",
+                        "tip": "10%PAC密度约为1150kg/m3",
+                        "value": "1150"
+                    }
+                },
+                "result": {
+                    "tank_dissolve_V": {
+                        "name": "溶药池体积m<sup>3</sup>",
+                        "tip": "溶药池体积",
+                        "calc": "dosage*(Q_av*Kz/24)/C/dailypreptime/417"
+                    },
+                    "tank_dosage_V": {
+                        "name": "投药池体积m<sup>3</sup>",
+                        "tip": "投药池体积，投药池应设置备用池。另，如药剂投加量较小，溶药池也可以用作投药池",
+                        "calc": "0.2*dosage*(Q_av*Kz/24)/C/dailypreptime/417"
+                    },
+                    "dailydemand": {
+                        "name": "每日药剂需求量(kg/d)",
+                        "tip": "",
+                        "calc": "(Q_av*Kz/24)*dosage*24/1000"
+                    },
+                    "pump_Q": {
+                        "name": "计量泵流量(L/h)",
+                        "tip": "",
+                        "calc": "(Q_av*Kz/24)*dosage/1000/(C/100)/density*1000"
+                    }
+                }
+            }
+        }
+    },
+    "sedimentation_highrate_primary": {
+        "name": "初沉-斜管(板)",
+		"pinyin":"chuchenxieguanban",
+        "category": "预处理",
+        "reference": "设计手册",
+        "design": {
+            "GB": {
+                "name": "GB国标",
+                "input": {
+                    "n": {
+                        "name": "池数(个)",
+                        "value": "4",
+                        "tip": "沉淀池个数"
+                    },
+                    "qprime": {
+                        "name": "设计表面负荷(m3/m2/h)",
+                        "value": "4",
+                        "tip": ""
+                    },
+                    "shape": {
+                        "name": "池型",
+                        "type": "radio",
+                        "value": "圆形|方形",
+                        "tip": "可选用方形或圆形池型"
+                    },
+                    "h2": {
+                        "name": "斜管上部水深(m)",
+                        "value": "0.7",
+                        "tip": "一般采用0.5~1"
+                    },
+                    "h3": {
+                        "name": "斜管高度(m)",
+                        "value": "0.866",
+                        "tip": "一般为0.866~1"
+                    },
+                    "sludge_calc_method": {
+                        "name": "污泥产量算法",
+                        "type": "radio",
+                        "value": "按人数计算|按悬浮物去除率算",
+                        "tip": ""
+                    },
+                    "S": {
+                        "name": "每人每日污泥量(L/人/d)",
+                        "value": "0.8",
+                        "tip": "一般采用0.3~0.8",
+                        "interlock": "sludge_calc_method_0"
+                    },
+                    "N": {
+                        "name": "设计人口数(人)",
+                        "value": "1000",
+                        "tip": "",
+                        "interlock": "sludge_calc_method_0"
+                    },
+                    "T": {
+                        "name": "污泥室储存周期(d)",
+                        "value": "2",
+                        "tip": "",
+                        "interlock": "sludge_calc_method_0"
+                    },
+                    "C1": {
+                        "name": "进水悬浮物浓度(t/m3)",
+                        "value": "0.00025",
+                        "tip": "",
+                        "interlock": "sludge_calc_method_1"
+                    },
+                    "C2": {
+                        "name": "出水悬浮物浓度(t/m3)",
+                        "value": "0.000125",
+                        "tip": "",
+                        "interlock": "sludge_calc_method_1"
+                    },
+                    "gamma": {
+                        "name": "污泥密度(t/m3)",
+                        "value": "1",
+                        "tip": "约为1",
+                        "interlock": "sludge_calc_method_1"
+                    },
+                    "rho0": {
+                        "name": "污泥含水率(%)",
+                        "value": "96",
+                        "tip": "",
+                        "interlock": "sludge_calc_method_1"
+                    },
+                    "sludge_bucket_shape": {
+                        "name": "污泥斗形状",
+                        "type": "radio",
+                        "value": "圆锥|方锥",
+                        "tip": ""
+                    },
+                    "h5": {
+                        "name": "污泥斗高度(m)",
+                        "value": "5.37",
+                        "tip": ""
+                    },
+                    "R": {
+                        "name": "污泥斗上部半径(m)",
+                        "value": "1",
+                        "tip": "",
+                        "interlock": "sludge_bucket_shape_0"
+                    },
+                    "r1": {
+                        "name": "污泥斗下部半径(m)",
+                        "value": "1",
+                        "tip": "",
+                        "interlock": "sludge_bucket_shape_0"
+                    },
+                    "a1": {
+                        "name": "污泥斗下部边长(m)",
+                        "value": "0.8",
+                        "tip": "",
+                        "interlock": "sludge_bucket_shape_1"
+                    },
+                    "h1": {
+                        "name": "超高(m)",
+                        "value": "0.3",
+                        "tip": ""
+                    },
+                    "h4": {
+                        "name": "缓冲层高度(m)",
+                        "value": "0.764",
+                        "tip": "斜管区底部缓冲层高度，一般采用0.6~1.2"
+                    }
+                },
+                "result": {
+                    "F": {
+                        "name": "池子水面面积(m2)",
+                        "calc": "(Q_av/24)/(n*qprime*0.91)"
+                    },
+                    "D": {
+                        "name": "圆形池直径(m)",
+                        "calc": "Math.sqrt(4*((Q_av/24)/(n*qprime*0.91))/3.14)",
+                        "interlock": "shape_0",
+                        "dimension": "D"
+                    },
+                    "a": {
+                        "name": "方形池边长(m)",
+                        "calc": "Math.sqrt((Q_av/24)/(n*qprime*0.91))",
+                        "interlock": "shape_1",
+                        "dimension": "LB"
+                    },
+                    "t": {
+                        "name": "池内停留时间(min)",
+                        "calc": "(h2+h3)*60/qprime"
+                    },
+                    "Q": {
+                        "name": "污泥产量(m3/h)",
+                        "calc": "Q_av/24*(C1-C2)*2400*T/(gamma*(100-rho0)*n)/24",
+                        "interlock": "sludge_calc_method_1",
+                        "alias": "sludge_primary_Q"
+                    },
+                    "V": {
+                        "name": "污泥所需体积(m3)",
+                        "calc": "Q_av/24*(C1-C2)*2400*T/(gamma*(100-rho0)*n)",
+                        "interlock": "sludge_calc_method_1"
+                    },
+                    "V1": {
+                        "name": "污泥斗容积(m3)",
+                        "calc": "h5*(2*Math.sqrt((Q_av/24)/(n*qprime*0.91))*Math.sqrt((Q_av/24)/(n*qprime*0.91))+2*Math.sqrt((Q_av/24)/(n*qprime*0.91))*a1+2*a1*a1)/6",
+                        "interlock": "sludge_bucket_shape_1"
+                    },
+                    "H": {
+                        "name": "沉淀池总高度(m)",
+                        "calc": "h1+h2+h3+h4+h5",
+                        "dimension": "H"
+                    }
+                }
+            }
+        }
+    },
+    "sludge_equalization_tank": {
+        "name": "污泥-贮泥池",
+		"pinyin":"wunizhunichi",
+        "category": "污泥处理",
+        "design": {
+            "GB": {
+                "name": "GB国标",
+                "input": {
+                    "Q1": {
+                        "name": "初沉污泥流入流量(m3/d)",
+                        "value": "100",
+                        "tip": "",
+						"alias":"sludge_primary_Q"
+                    },
+                    "excess_sludge_thickened": {
+                        "name": "流入剩余污泥是否经过浓缩",
+                        "type": "radio",
+                        "value": "是|否",
+                        "tip": ""
+                    },
+                    "Q2": {
+                        "name": "浓缩后剩余污泥流入流量(m3/d)",
+                        "value": "100",
+                        "tip": "",
+                        "interlock": "excess_sludge_thickened_1",
+                        "alias": "sludge_excess_thickened_Q"
+                    },
+                    "n": {
+                        "name": "贮泥池个数",
+                        "value": "1",
+                        "tip": ""
+                    },
+                    "t": {
+                        "name": "贮泥时间(h)",
+                        "value": "8",
+                        "tip": "一般采用8~12h"
+                    },
+                    "h2": {
+                        "name": "贮泥池有效水深(m)",
+                        "value": "5",
+                        "tip": ""
+                    },
+                    "h1": {
+                        "name": "超高(m)",
+                        "value": "0.3",
+                        "tip": "一般采用0.3"
+                    }
+                },
+                "result": {
+                    "Q": {
+                        "name": "每日产生的污泥量(m3/d)",
+                        "calc": "Q1+Q2"
+                    },
+                    "V": {
+                        "name": "贮泥池计算容积(m3)",
+                        "calc": "(Q1+Q2)*t/24/n"
+                    },
+                    "L": {
+                        "name": "贮泥池边长(m)",
+                        "calc": "Math.sqrt(((Q1+Q2)*t/24/n)/h2)",
+                        "dimension": "LB"
+                    },
+                    "H": {
+                        "name": "贮泥池高(m)",
+                        "calc": "h1+h2",
+                        "dimension": "H"
+                    }
+                }
+            },
+            "DIN": {
+                "name": "德国标准",
+                "input": {
+                    "density": {
+                        "name": "溶液密度kg/m<sup>3</sup>",
+                        "tip": "10%PAC密度约为1150kg/m3",
+                        "value": "1150"
+                    }
+                }
+            }
+        }
+    }
+}

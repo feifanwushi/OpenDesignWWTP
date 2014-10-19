@@ -1,0 +1,79 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="keywords" content="OpenDesignWWTP, Open Source, Wastewater treatment design, computer design,环境工程设计,水处理设计">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href="css/tip-yellow.css" rel="stylesheet" type="text/css" />
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="javascripts/extensions.js"></script>
+<script src="javascripts/jquery.jsontotable.min.js"></script>
+<script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+	//LANGUAGE
+				var lang=getlang()
+				//RETRIEVE DATABASE
+				var equipment=getjson("equipment_"+lang);
+				var label=getjson("label_"+lang);
+				var design=getjson("design_"+lang);
+	
+	
+$(document).ready(function() {
+    
+	buildpage();
+	
+	if(localStorage.getItem("equipment"))
+			{ var tmp_equipment=JSON.parse(localStorage.equipment);
+			
+			
+			
+			
+			 var tmp_html
+			 $("#div_center").html('<table class="table table-hover"><caption>'+label.equipment_cart+'</caption><tbody></tbody></table>');
+			 $.each(tmp_equipment,function(key,value){
+				 tmp_html=""
+				 for (x in value){
+				 tmp_html+='<tr for='+key+'><td class="width-33">'+equipment[key][value[x]]["name"]+'</td><td class="width-33">'+equipment[key][value[x]]["details"]+'</td></tr>';
+				 }
+				 $("#div_center tbody").append(tmp_html);
+				 $("tr[for="+key+"]:first").prepend('<td class="width-33 text-center" rowspan='+value.length+'>'+design[key]["name"]+'</td>')
+				 
+				 })
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}
+		else
+			{ $("#div_center").html("currently, nothing stored")
+			}
+	
+	
+});
+
+</script>
+<script src="javascripts/ready.js"></script>
+</head>
+
+<body>
+</body>
+</html>

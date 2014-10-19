@@ -1,0 +1,14 @@
+﻿{
+"contactus":{"name":"联系我们","value":"如果有任何的疑问可以发邮件询问，如发现bug或issue,请在github的issue版面提交你发现的bug或issue，<a href='https://www.github.com/he-yang/opendesignwwtp/issues' target='_blank'>现在提交</a>，如果你不知道如何使用github,也可以用邮件告知我们你发现的bug或issue<p></p><p>Team Members</p><table width='100%' class='table table-hover'><tr><td width='50%' >He Yang</td><td>project maintainer<br />employed by Beijing Sound Environmental Engineering Co.,Ltd.<br />    email: <u>he AT heyang DOT xyz</u></td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></table><p>Contributors</p><table width='100%' class='table table-hover'><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></table>"},
+
+
+"contribute":{"name":"我想参与","value":"<p>您可以通过以下方式参与到本项目中来</p><ol><li>贡献自己的专业知识，如网页设计、污水处理设计知识等，我们欢迎各专业人士的贡献</li><li>经济支持，可以捐助给本项目，以使本项目有良好的运行基础设施，如服务器</li></ol>"},
+
+
+
+"version":{"name":"版本","value":"<h4>version:1.0.0.140920_alpha</h4>build up database, basic form generation, form validation, index page<br />include function: treatment unit design<br />include units:chemicalfeed<h4>version:1.1.0.??????_alpha</h4>multi-language support<br />include units:"},
+
+
+
+"license":{"name":"版权","value":"<p>OpenDesignWWTP is Licensed under MIT</p><p>Copyright (c) 2014 He Yang Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>This project is based on<br/><ul><li><a href='http://www.jquery.org/'>JQuery</a> by The jQuery Foundation Licensed under the MIT license</li><li>JQuery Plugins</li><ol><li><a href='http://jqueryvalidation.org/JQuery Validation'>JQuery Validation</a> by  Jörn Zaefferer Licensed under the MIT license</li><li><a href='https://github.com/jongha/jquery-jsontotable'>JQuery Json to Table</a> by Jong-Ha Ahn Licensed under the MIT license</li></ol><li><a href='http://getbootstrap.com'>Bootstrap</a> by Twitter Licensed under the MIT license</li><li><a href='http://glyphicons.com'>glyphicons</a></li></ul>"}
+}

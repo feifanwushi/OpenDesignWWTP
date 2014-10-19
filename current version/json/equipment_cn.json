@@ -1,0 +1,12 @@
+﻿{
+	"chemical_feed":[
+		{"name":"搅拌溶药罐","details":"搅拌罐细节"},
+		{"name":"加药泵","details":"加药泵细节"},
+		{"name":"轴流风机","details":"轴流风机细节"}
+		],
+		
+	"sludge_equalization_tank":[
+		{"name":"搅拌器","details":"r=,N=kW"}
+		]
+
+}

@@ -1,0 +1,57 @@
+﻿{
+    "button": {
+        "submit": "开始计算",
+        "reset": "重置",
+        "equipment": "查看相关设备",
+		"add_to_equipment_cart":"加入设备列表"
+		
+    },
+    "header": [
+        
+		{
+            "name": "设备列表",
+            "value": "equipment.html"
+        },
+		{
+            "name": "土建列表",
+            "value": "civil.html"
+        },
+		{
+            "name": "费用估算",
+            "value": "estimation.html"
+        },
+        {
+            "name": "联系我们",
+            "value": "support.html?support=contactus"
+        },
+        {
+            "name": "我想参与",
+            "value": "support.html?support=contribute"
+        },
+        {
+            "name": "github",
+            "value": "https://github.com/he-yang/opendesignwwtp"
+        }
+    ],
+    "footer": "建议使用现代浏览器并最大化窗口并允许javascript和cookie以获得最佳效果<br>Copyright (c) 2014 He Yang, Released under the MIT <a href='support.html?support=license'>license</a>",
+    "showresult": "计算结果",
+    "showequipment": "设备列表",
+    "alerts": [
+        {
+            "value": "建议使用现代浏览器如Chrome,Firfox,Safari以获得最佳体验，并请允许浏览器的javascripts和cookies，这些功能默认打开"
+        },
+        {
+            "value": "如有任何疑问，请<a href='support.html?support=contactus'>联系我们</a>"
+        }
+    ],
+	"close_alert":"关闭提示",
+	"last_input":"根据上次输入所得数值",
+	"alias_input":"根据在前面进行的其他单体的运算获得的数据",
+	"suggest_user_alias":"获取数据",
+	"confirm_user_alias":"如同意，将获取前面其他单体运算所获得的数值，如：在设计贮泥池时，需要知道来自初沉池的污泥流量数据，如果前面已经设计过初沉池，那么同意将获取初沉污泥流量数据以用于贮泥池的设计",
+	"select_code":"选择设计规范",
+	"add_to_equipment_cart":"放入设备列表",
+	"equipment_cart":"设备列表",
+	"civil_cart":"建构筑物表",
+	"units":"单体列表"
+}
