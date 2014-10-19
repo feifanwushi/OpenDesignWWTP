@@ -1,0 +1,63 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="keywords" content="OpenDesignWWTP, Open Source, Wastewater treatment design, computer design,环境工程设计,水处理设计">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenDesignWWTP</title>
+
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="javascripts/extensions.js"></script>
+<script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+
+	
+	//LANGUAGE
+	var lang=getlang();
+	
+	//RETRIEVE DESIGN DATABASE
+	var design=getjson("design_"+lang);
+	var label= getjson("label_cn");
+	
+/*	$.ajaxSettings.async = false;
+	
+	
+	$.getJSON("json/design_"+lang+".json",function(data){
+		
+		window.design=data;
+		
+		})*/
+	
+	//var a= $.ajax({url:"json/design_cn.json",async:false,dataType:"json"},error(err):alert(err))
+	 
+
+/*function gotodesign(x,y){
+window.location.href="design.html?unit=" +x+"&lang="+y;	
+}*/
+
+$(document).ready(function() {
+/*    $(".tabs").tabs(".pane", {
+		onClick: function () {
+	  		console.log(this.getConf(), this.getCurrentPane(), this.getCurrentTab(), this.getIndex(), this.getPanes(), this.getTabs());}});*/
+		
+	buildpage();
+	
+	tmp_html='新项目？<a href="javascript:void(0)" onclick="localStorage.clear()">删除</a>原有计算结果吧<br\>设计<ul><li>预处理<ul><li>格栅</li><li>沉砂</li></ul></li><li>生物处理<ul><li>AAO</li><li>CASS</li><li>氧化沟</li></ul></li><li>深度处理<ul><li>混凝</li><li>沉淀<ul><li>平流沉淀</li><li><a id="sedimentation_highrate_primary">斜管/斜板</a></li></ul></li><li>过滤<ul><li>砂滤</li><li>滤布</li></ul></li></ul></li><li>消毒<ul><li>二氧化氯</li><li>紫外</li></ul></li><li>污泥<ul><li>浓缩</li><li><a id="sludge_equalization_tank">污泥贮池</a></li><li>脱水<ul><li>带式脱水</li></ul></li></ul></li><li>辅助<ul><li>鼓风机</li><li><a id="chemical_feed">加药</a></li><li></li></ul></li></ul>'
+	$("#div_center").html(tmp_html)		
+	
+	$("a[id]").attr("href","javascript:void(0)");
+	$("a[id]").click(function(){
+	
+		window.location.href="design.html?unit=" +this.id+"&lang="+lang
+		}
+	)
+	
+});
+</script>
+<script src="javascripts/ready.js"></script>
+</head>
+
+<body>
+</body>
+</html>
