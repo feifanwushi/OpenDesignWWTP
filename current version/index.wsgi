@@ -8,7 +8,7 @@
 #FuncDesignger and openopt are used as Global problem 'solver', see documentation at www.openopt.org
 from FuncDesigner import *
 from openopt import GLP
-import json
+
 #Bottle is a well-known python based web programming framework
 from bottle import Bottle,run,request,post,debug
 
@@ -22,16 +22,15 @@ def hello():
 
 
 @app.route('/', method = 'POST')
-@app.route('/w')
 #OpenDesignWWTP optimization process start HERE
 def optimize():
-    #json = request.json
+    
     #Words may bring risks to server are prohibited
     illegalwords=["import","os.","delete",'sys.','sae']
     flag=True
     found_iw=''
     #Obtain string from Client, filetype JSON
-    ostr=request.json#{"str":"x=oovar('x');y=oovar('y');f=x*y;startpoint={x:0,y:0};constraints=[x>=0,x<=5,y>=0,y<=5,x+y==5]"}
+    ostr=request.json
     #Illegal words filter
     for iw in illegalwords:
         if iw in ostr['str']:flag=False;found_iw+=','+iw
