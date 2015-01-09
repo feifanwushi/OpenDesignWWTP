@@ -2,16 +2,21 @@ OpenDesignWWTP
 ==============
 
 <h2>Description</h2>
-OpenDesignWWTP is an open-source wastewater treatment plant design program.<br\>
-OpenDesignWWTP does not require you to download or install anything to your PC/Laptop/Mobile Device, simply visit http://heyang.xyz/opendesignwwtp  and start the wonderful design journey.
+OpenDesignWWTP is an open-source web-application for assisting wastewater treatment plant design program.<br\>
+
+<h2>Demo</h2>
+http://heyang.xyz/opendesignwwtp 
+OpenDesignWWTP is a web app, the above demo site acturally is the OpenDesignWWTP. No need to download or install anything to your PC/Laptop/Mobile Device, simply visit http://heyang.xyz/opendesignwwtp, you may use all the features of OpenDesignWWTP.
 
 <h2>Documentation</h2>
+<b>A comprehensive documentaion, anything you don't know, try here first.</b>
 Documentation includes Developer Doc and User Doc
 https://github.com/he-yang/OpenDesignWWTP/wiki
 
 
 <h2>Contact</h2>
-Project lead: he-yang, email : he at heyang dot xyz
+Project leader: He Yang, email : he at heyang dot xyz
+Visit http://heyang.xyz/opendesignwwtp/contact.html for more.
 
 <h2>Contribution and Cooperation wanted</h2>
 Contribution and cooperation wanted. If you know javascript, html, css, python, project cost estimation, wastewater treatment plant design, website design ........ and you are intested in contribution to this project, please let us know.
